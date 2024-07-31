@@ -1,5 +1,3 @@
-import axios from "axios";
-
 // 응답 상태코드가 2xx 인지 확인, 아닐경우 에러 메시지 출력
 export async function checkStatus(res) {
     // 요청 성공적으로 처리했을 때
