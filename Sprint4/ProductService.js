@@ -1,7 +1,9 @@
 import axios from 'axios';
 
+const baseUrl = "https://sprint-mission-api.vercel.app/products";
+
 export async function getProductList(page, pageSize, keyword) {
-    const URL = `https://sprint-mission-api.vercel.app/products?page=${page}&pageSize=${pageSize}&keyword=${keyword}`;
+    const URL = `${baseUrl}?page=${page}&pageSize=${pageSize}&keyword=${keyword}`;
     try {
       const response = await axios.get(URL);
       const data = response.data;
@@ -13,7 +15,7 @@ export async function getProductList(page, pageSize, keyword) {
 }
 
 export async function getProduct(id) {
-    const URL = `https://sprint-mission-api.vercel.app/products/${id}`;
+    const URL = `${baseUrl}/${id}`;
     try {
         const response = await axios.get(URL);
         const data = response.data;
@@ -25,10 +27,9 @@ export async function getProduct(id) {
 }
 
 export async function createProduct(product) {
-    const URL = 'https://sprint-mission-api.vercel.app/products';
 
     try {
-      const response = await axios.post(URL,
+      const response = await axios.post(baseUrl,
         {
         name: product.name,
         description: product.description,
@@ -46,7 +47,7 @@ export async function createProduct(product) {
   }
 
 export async function patchProduct(id, Product) {
-    const URL = `https://sprint-mission-api.vercel.app/products/${id}`;
+    const URL = `${baseUrl}/${id}`;
   
     try {
       const response = await axios.patch(URL, Product);
@@ -59,7 +60,7 @@ export async function patchProduct(id, Product) {
 }
 
 export async function deleteProduct(id) {
-    const URL = `https://sprint-mission-api.vercel.app/products/${id}`;
+    const URL = `${baseUrl}/${id}`;
   
     try {
       const response = await axios.delete(URL);
