@@ -1,3 +1,6 @@
+
+const baseUrl = "https://sprint-mission-api.vercel.app/articles";
+
 // 응답 상태코드가 2xx 인지 확인, 아닐경우 에러 메시지 출력
 export async function checkStatus(res) {
     // 요청 성공적으로 처리했을 때
@@ -12,20 +15,20 @@ export async function checkStatus(res) {
 
 export async function getArticleList(page, pageSize, keyword) {
     const response = await fetch(
-        `https://sprint-mission-api.vercel.app/articles?page=${page}&pageSize=${pageSize}&keyword=${keyword}`)
+        `${baseUrl}=${page}&pageSize=${pageSize}&keyword=${keyword}`)
         .then((checkStatus))
         .catch(error => console.error(error));
 }
 
 export async function getArticle(articleId){
-    const response = await fetch(`https://sprint-mission-api.vercel.app/articles/${articleId}`)
+    const response = await fetch(`${baseUrl}/${articleId}`)
     .then(checkStatus)
     .catch(error => console.error(error)
   );
 }
 
 export async function createArticle(title, content, image){
-    const response = await fetch('https://sprint-mission-api.vercel.app/articles', {
+    const response = await fetch(baseUrl, {
       method: 'POST',
       body: JSON.stringify({ title, content, image }),
       headers: {
@@ -37,7 +40,7 @@ export async function createArticle(title, content, image){
 }
 
 export async function patchArticle(articleId, updatedContent){
-    const response = await fetch(`https://sprint-mission-api.vercel.app/articles/${articleId}`, 
+    const response = await fetch(`${baseUrl}/${articleId}`, 
         {
         method: 'PATCH',
         body: JSON.stringify(updatedContent),
@@ -50,7 +53,7 @@ export async function patchArticle(articleId, updatedContent){
 }
 
 export async function deleteArticle(articleId){
-    const response = await fetch(`https://sprint-mission-api.vercel.app/articles/${articleId}`, {
+    const response = await fetch(`${baseUrl}/${articleId}`, {
         method: 'DELETE',
         })
         .then((response) => {if(response.status >= 200 && response.status < 300)
